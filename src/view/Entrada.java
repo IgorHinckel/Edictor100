@@ -14,18 +14,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
- *
  * @author igor.souza
  */
 public class Entrada {
 
-    private JFrame jFrameTelaEntrada, jFrameTelaCriarArquivo;
+    private JFrame jFrameTelaEntrada;
     private JButton jButtonCriarArquivo, jBtuttonAbrirArquivo;
     public JMenuBar jMenuBar;
     public JMenu jMenuArquivo, jMenuFormatar, jMenuOpcoes, jMenuAjuda, jMenuSobre;
     public String caracteres;
     public FileWriter arquivo;
-    private JTextArea jTextAreaEdicao;
+
     private JScrollPane scroll;
 
     public Entrada() {
@@ -60,27 +59,10 @@ public class Entrada {
 
         jButtonCriarArquivo.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                criarArquivo();
+                TelaCriarArquivo chamaCriacaoArquivo = new TelaCriarArquivo();
+                jFrameTelaEntrada.dispose();
             }
         });
-    }
-
-    private void criarArquivo() {
-
-        jFrameTelaCriarArquivo = new JFrame();
-        jFrameTelaCriarArquivo.setSize(600, 400);
-        jFrameTelaCriarArquivo.setLayout(null);
-        jFrameTelaCriarArquivo.setLocationRelativeTo(null);
-        jFrameTelaCriarArquivo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrameTelaCriarArquivo.setVisible(true);
-
-        
-        criarMenuBar();
-        jFrameTelaCriarArquivo.add(jMenuBar);
-        
-        criarAreaEdicao();
-        
-
     }
 
     private void tentativaCriarArquivo() {
@@ -93,20 +75,6 @@ public class Entrada {
 
         }
     }
-    
-    private void criarAreaEdicao() {
-        
-        jTextAreaEdicao = new JTextArea();
-        scroll = new JScrollPane(jTextAreaEdicao);
-        jFrameTelaCriarArquivo.getContentPane().add(scroll);
-       
-        
-        
-        jTextAreaEdicao.setBounds(15, 35, 545, 320);
-        jTextAreaEdicao.setLineWrap(true);
-        
-         }
-    
 
     private void criarMenuBar() {
 
