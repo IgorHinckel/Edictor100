@@ -105,7 +105,7 @@ public class TelaCriarArquivo {
     }
 
     private void salvarArquivoCriado() {
-        /*
+        
         File diretorio = new File("C:\\Users\\igor.souza\\Desktop\\arquivos");
         boolean status = diretorio.mkdir();
         File arquivo = new File(diretorio, "Arquivos");
@@ -117,7 +117,7 @@ public class TelaCriarArquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    
         JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
     }
 }
