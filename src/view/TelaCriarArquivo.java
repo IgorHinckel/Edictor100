@@ -11,15 +11,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 /**
  * @author igor.souza
@@ -31,9 +29,10 @@ public class TelaCriarArquivo {
     private JTextArea jTextAreaEdicao;
     private JScrollPane scroll;
     private JMenu jMenuArquivo, jMenuFormatar, jMenuOpcoes, jMenuAjuda, jMenuSobre;
-    private JMenu jMenuSubMenuArquivoSalvar;
+    private JMenuItem jMenuSubMenuArquivoSalvar;
     private Dimension tamanhoTela;
     private Toolkit tk = Toolkit.getDefaultToolkit();
+    
 
     public TelaCriarArquivo() {
         criarTelaCriarArquivo();
@@ -94,7 +93,7 @@ public class TelaCriarArquivo {
         jMenuBar.add(jMenuSobre);
 
         /*Criar SubMenus*/
-        jMenuSubMenuArquivoSalvar = new JMenu("Salvar");
+        jMenuSubMenuArquivoSalvar = new JMenuItem("Salvar");
         jMenuArquivo.add(jMenuSubMenuArquivoSalvar);
 
         /*Adicionando A barra de menu ao JFrame*/
@@ -102,8 +101,12 @@ public class TelaCriarArquivo {
     }
 
     private void acaoSubMenus() {
+ 
+    
     }
 
+    
+    /*Adicionar a ação do SubMenu primeiro*/
     private void salvarArquivoCriado() {
         
         File diretorio = new File("C:\\Users\\igor.souza\\Desktop\\arquivos");
