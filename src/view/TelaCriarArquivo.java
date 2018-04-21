@@ -6,11 +6,16 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -18,6 +23,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 /**
  * @author igor.souza
@@ -32,7 +39,6 @@ public class TelaCriarArquivo {
     private JMenuItem jMenuSubMenuArquivoSalvar;
     private Dimension tamanhoTela;
     private Toolkit tk = Toolkit.getDefaultToolkit();
-    
 
     public TelaCriarArquivo() {
         criarTelaCriarArquivo();
@@ -101,14 +107,20 @@ public class TelaCriarArquivo {
     }
 
     private void acaoSubMenus() {
- 
+        jMenuSubMenuArquivoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JOptionPane.showMessageDialog(null, "Teste");
+               
+                
+            }
+        });
     
+        
     }
 
-    
     /*Adicionar a ação do SubMenu primeiro*/
     private void salvarArquivoCriado() {
-        
+
         File diretorio = new File("C:\\Users\\igor.souza\\Desktop\\arquivos");
         boolean status = diretorio.mkdir();
         File arquivo = new File(diretorio, "Arquivos");
@@ -116,11 +128,11 @@ public class TelaCriarArquivo {
         try {
             boolean statusArq = arquivo.createNewFile();
             JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
+
         JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
     }
 }
