@@ -1,66 +1,119 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import javax.swing.JButton;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 /**
- * @author igor.souza
+ * @author igorh
  */
-public class TelaCriarArquivo {
-
-    private JFrame jFrameTelaCriarArquivo;
-    private JMenuBar jMenuBar;
-    private JTextArea jTextAreaEdicao;
-    private JScrollPane scroll;
-    private JMenu jMenuArquivo, jMenuFormatar, jMenuOpcoes, jMenuAjuda, jMenuSobre;
-    private JMenuItem jMenuSubMenuArquivoSalvar;
+public class TelaCriarArquivo extends javax.swing.JFrame {
+    
     private Dimension tamanhoTela;
     private Toolkit tk = Toolkit.getDefaultToolkit();
-
+    private JTextArea jTextAreaEdicao;
+    private JScrollPane scroll;
+    private String textoEscrito;
+    
+    
     public TelaCriarArquivo() {
-        criarTelaCriarArquivo();
+        initComponents();
         criarAreaEdicao();
-        criarMenuBar();
-        acaoSubMenus();
     }
 
-    private void criarTelaCriarArquivo() {
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-        jFrameTelaCriarArquivo = new JFrame();
-        jFrameTelaCriarArquivo.setSize(600, 400);
-        jFrameTelaCriarArquivo.setTitle("Edictor1000");
-        jFrameTelaCriarArquivo.setLayout(null);
-        jFrameTelaCriarArquivo.setLocationRelativeTo(null);
-        jFrameTelaCriarArquivo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrameTelaCriarArquivo.setVisible(true);
-        criarMenuBar();
-        jFrameTelaCriarArquivo.add(jMenuBar);
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuArquivo = new javax.swing.JMenu();
+        jMenuItemSalvar = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Edictor1000 - Criar Arquivo");
+
+        jMenuArquivo.setText("Arquivo");
+
+        jMenuItemSalvar.setText("Salvar");
+        jMenuItemSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSalvarActionPerformed(evt);
+            }
+        });
+        jMenuArquivo.add(jMenuItemSalvar);
+
+        jMenuBar1.add(jMenuArquivo);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 697, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 465, Short.MAX_VALUE)
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalvarActionPerformed
+        salvarArquivoCriado();
+    }//GEN-LAST:event_jMenuItemSalvarActionPerformed
+
+   
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaCriarArquivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaCriarArquivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaCriarArquivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaCriarArquivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TelaCriarArquivo().setVisible(true);
+            }
+        });
     }
-
-    private void criarAreaEdicao() {
+    
+   private void criarAreaEdicao() {
 
         tamanhoTela = tk.getScreenSize();
 
@@ -68,71 +121,45 @@ public class TelaCriarArquivo {
         jTextAreaEdicao.setLineWrap(true);
 
         scroll = new JScrollPane(jTextAreaEdicao);
-        scroll.setBounds(1, 31, tamanhoTela.width, tamanhoTela.height);
+        scroll.setBounds(1, 1, tamanhoTela.width, tamanhoTela.height);
 
         scroll.setBorder(null);
-        jFrameTelaCriarArquivo.getContentPane().add(scroll);
+        getContentPane().add(scroll);
     }
+   
+   
+   /*Salvar (gravar )dados do aqruivo */
+   private void salvarArquivoCriado() {
 
-    private void criarMenuBar() {
-
-        tamanhoTela = tk.getScreenSize();
-
-        /*Criando a Barra de Menu */
-        jMenuBar = new JMenuBar();
-        jMenuBar.setBounds(0, 0, tamanhoTela.width, 30);
-
-        /*Criando as opções do da Barra do Menu */
-        jMenuArquivo = new JMenu("Arquivo");
-        jMenuBar.add(jMenuArquivo);
-
-        jMenuFormatar = new JMenu("Formatar");
-        jMenuBar.add(jMenuFormatar);
-
-        jMenuOpcoes = new JMenu("Opções");
-        jMenuBar.add(jMenuOpcoes);
-
-        jMenuAjuda = new JMenu("Ajuda");
-        jMenuBar.add(jMenuAjuda);
-
-        jMenuSobre = new JMenu("Sobre");
-        jMenuBar.add(jMenuSobre);
-
-        /*Criar SubMenus*/
-        jMenuSubMenuArquivoSalvar = new JMenuItem("Salvar");
-        jMenuArquivo.add(jMenuSubMenuArquivoSalvar);
-
-        /*Adicionando A barra de menu ao JFrame*/
-        jFrameTelaCriarArquivo.add(jMenuBar);
-    }
-
-    private void acaoSubMenus() {
-        jMenuSubMenuArquivoSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JOptionPane.showMessageDialog(null, "Teste");
-               
-                
-            }
-        });
-    
-        
-    }
-
-    /*Adicionar a ação do SubMenu primeiro*/
-    private void salvarArquivoCriado() {
-
-        File diretorio = new File("C:\\Users\\igor.souza\\Desktop\\arquivos");
+        File diretorio = new File("C:\\Users\\igorh\\OneDrive\\Desktop\\Arquivo");
         boolean status = diretorio.mkdir();
-        File arquivo = new File(diretorio, "Arquivos");
-
+        
+       
+        String nomeArquivo = JOptionPane.showInputDialog("Salvar como");
+        File arquivo = new File(diretorio,nomeArquivo + ".txt");
+                   
         try {
             boolean statusArq = arquivo.createNewFile();
+            FileReader fw = new FileReader(arquivo);
+            BufferedReader bw = new BufferedReader(fw);
+            String escritas = "";
+            
             JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
+            
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+       
 
-        JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
+        
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenuArquivo;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemSalvar;
+    // End of variables declaration//GEN-END:variables
 }

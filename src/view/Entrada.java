@@ -60,6 +60,7 @@ public class Entrada {
         jButtonCriarArquivo.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 TelaCriarArquivo chamaCriacaoArquivo = new TelaCriarArquivo();
+                chamaCriacaoArquivo.setVisible(true);
                 jFrameTelaEntrada.dispose();
             }
         });
