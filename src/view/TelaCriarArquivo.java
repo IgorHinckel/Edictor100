@@ -131,7 +131,7 @@ public class TelaCriarArquivo extends javax.swing.JFrame {
    /*Salvar (gravar )dados do aqruivo */
    private void salvarArquivoCriado() {
 
-        File diretorio = new File("C:\\Users\\igorh\\OneDrive\\Desktop\\Arquivo");
+        File diretorio = new File("C:\\Users\\igor.souza\\Desktop\\Arquivo");
         boolean status = diretorio.mkdir();
         
        
