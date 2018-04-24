@@ -3,12 +3,16 @@ package view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -18,14 +22,13 @@ import javax.swing.JTextArea;
  * @author igorh
  */
 public class TelaCriarArquivo extends javax.swing.JFrame {
-    
+
     private Dimension tamanhoTela;
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private JTextArea jTextAreaEdicao;
     private JScrollPane scroll;
     private String textoEscrito;
-    
-    
+
     public TelaCriarArquivo() {
         initComponents();
         criarAreaEdicao();
@@ -79,7 +82,6 @@ public class TelaCriarArquivo extends javax.swing.JFrame {
         salvarArquivoCriado();
     }//GEN-LAST:event_jMenuItemSalvarActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -112,8 +114,8 @@ public class TelaCriarArquivo extends javax.swing.JFrame {
             }
         });
     }
-    
-   private void criarAreaEdicao() {
+
+    private void criarAreaEdicao() {
 
         tamanhoTela = tk.getScreenSize();
 
@@ -126,34 +128,38 @@ public class TelaCriarArquivo extends javax.swing.JFrame {
         scroll.setBorder(null);
         getContentPane().add(scroll);
     }
-   
-   
-   /*Salvar (gravar )dados do aqruivo */
-   private void salvarArquivoCriado() {
 
-        File diretorio = new File("C:\\Users\\igor.souza\\Desktop\\Arquivo");
-        boolean status = diretorio.mkdir();
-        
-       
-        String nomeArquivo = JOptionPane.showInputDialog("Salvar como");
-        File arquivo = new File(diretorio,nomeArquivo + ".txt");
-                   
+    /*Salvar (gravar )dados do aqruivo */
+    private void salvarArquivoCriado() {
+
         try {
-            boolean statusArq = arquivo.createNewFile();
-            FileReader fw = new FileReader(arquivo);
-            BufferedReader bw = new BufferedReader(fw);
-            String escritas = "";
-            
-            JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
-            
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int teste = fileChooser.showOpenDialog(null);
+            if (teste == JFileChooser.APPROVE_OPTION) {
+                
+                String auxDiretorio = String.valueOf(fileChooser.getSelectedFile());
+                
+                
+                File diretorio = new File(auxDiretorio);
+                boolean status = diretorio.mkdir();
+                String nomeArquivo = JOptionPane.showInputDialog("Salvar como");
+                File arquivo = new File(auxDiretorio, nomeArquivo + ".txt");
+
+                /*Gravar no arquivo*/
+                PrintWriter out = new PrintWriter(new FileOutputStream(arquivo));
+                out.print(jTextAreaEdicao.getText());
+                out.flush();
+                out.close();
+
+                JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
+
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-       
-
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
