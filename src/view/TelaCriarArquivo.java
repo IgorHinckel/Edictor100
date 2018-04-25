@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import jdk.nashorn.internal.ir.BreakNode;
 
 /**
  * @author igorh
@@ -135,28 +136,33 @@ public class TelaCriarArquivo extends javax.swing.JFrame {
         try {
 
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            int teste = fileChooser.showOpenDialog(null);
-            if (teste == JFileChooser.APPROVE_OPTION) {
-                
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            int caminho = fileChooser.showOpenDialog(null);
+            if (caminho == JFileChooser.APPROVE_OPTION) {
+
                 String auxDiretorio = String.valueOf(fileChooser.getSelectedFile());
-                
-                
+
                 File diretorio = new File(auxDiretorio);
                 boolean status = diretorio.mkdir();
+               
                 String nomeArquivo = JOptionPane.showInputDialog("Salvar como");
+
                 File arquivo = new File(auxDiretorio, nomeArquivo + ".txt");
+                if (arquivo.exists()) {
+                    JOptionPane.showMessageDialog(null, "Arquivo ja existe");
+                    fileChooser.setVisible(true);
+                } else {
+                    /*Gravar no arquivo*/
+                   
+                        PrintWriter out = new PrintWriter(new FileOutputStream(arquivo));
+                        out.print(jTextAreaEdicao.getText());
+                        out.flush();
+                        out.close();
+                        JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
+                    
 
-                /*Gravar no arquivo*/
-                PrintWriter out = new PrintWriter(new FileOutputStream(arquivo));
-                out.print(jTextAreaEdicao.getText());
-                out.flush();
-                out.close();
-
-                JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
-
+                }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
